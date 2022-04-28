@@ -6,14 +6,32 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
   View,
+  Alert,
 } from 'react-native';
+import { requestUserPermission, NotificationListener } from './src/utils/FCMService';
+import messaging from '@react-native-firebase/messaging';
 
+
+console.log('test');
 const App = () => {
+  useEffect(() => {
+    requestUserPermission();
+    NotificationListener();
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>RNProject</Text>
