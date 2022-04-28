@@ -13,7 +13,7 @@ import {
   View,
   Alert,
 } from 'react-native';
-import { requestUserPermission, NotificationListener } from './src/utils/FCMService';
+import { requestUserPermission, NotificationListener } from './utils/FCMService';
 import messaging from '@react-native-firebase/messaging';
 
 
